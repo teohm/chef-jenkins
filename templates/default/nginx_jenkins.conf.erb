@@ -21,6 +21,10 @@ server {
 
   client_max_body_size <%= @max_upload_size %>;
 
+  location =/deploy-key.pub {
+    alias <%= node[:jenkins][:server][:home] %>/deploy-key.pub;
+  }
+
   location / {
     proxy_pass http://127.0.0.1:<%= node[:jenkins][:server][:port] %>;
     proxy_set_header X-Real-IP $remote_addr;

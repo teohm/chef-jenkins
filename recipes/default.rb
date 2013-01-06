@@ -60,6 +60,11 @@ ruby_block "store jenkins ssh pubkey" do
   end
 end
 
+execute "cp #{pkey}.pub #{node[:jenkins][:server][:home]}/deploy-key.pub" do
+  user  node[:jenkins][:server][:user]
+  group node[:jenkins][:server][:group]
+end
+
 directory "#{node[:jenkins][:server][:home]}/plugins" do
   owner node[:jenkins][:server][:user]
   group node[:jenkins][:server][:group]
