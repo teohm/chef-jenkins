@@ -41,6 +41,13 @@ directory "#{node[:jenkins][:server][:home]}/.ssh" do
   group node[:jenkins][:server][:group]
 end
 
+template "#{node[:jenkins][:server][:home]}/.ssh/config" do
+  source "ssh_config.erb"
+  mode 0644
+  owner node[:jenkins][:server][:user]
+  group node[:jenkins][:server][:group]
+end
+
 execute "ssh-keygen -f #{pkey} -N ''" do
   user  node[:jenkins][:server][:user]
   group node[:jenkins][:server][:group]
