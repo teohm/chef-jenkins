@@ -53,4 +53,5 @@ nginx_site "jenkins.conf" do
   else
     enable false
   end
+  notifies  :restart, 'service[nginx]'
 end
